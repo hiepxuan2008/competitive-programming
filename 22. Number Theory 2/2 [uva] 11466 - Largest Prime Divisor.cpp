@@ -5,8 +5,9 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-
 #define MAX 10000000
+
+// O(Nlog(logN))
 void sievePrimes(int n, vector<long long>& primes) {
 	vector<bool> prime(n + 1, true);
 	for (int p = 2; p*p <= n; p++) {

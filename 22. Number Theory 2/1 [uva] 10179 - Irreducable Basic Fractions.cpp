@@ -1,10 +1,12 @@
 // Problem: 10179 - Irreducable Basic Fractions
 // Link: https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=1120
 // Author: Mai Thanh Hiep
+// Complexity: T * O(sqrt(N)), N < 10^9
 
 #include <iostream>
 using namespace std;
 
+// O(sqrt(N))
 int phi(int n) {
 	int result = n;
 	for (int i = 2; i * i <= n; i++) {

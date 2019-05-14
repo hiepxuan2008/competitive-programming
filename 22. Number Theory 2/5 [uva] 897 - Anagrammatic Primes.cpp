@@ -16,6 +16,7 @@ vector<int> anagrammaticPrimes;
 		Therefore, checking prime upto 1000 is enough for this problem.
 */ 
 
+// O(Nlog(logN))
 void sievePrimes(int n) {
 	primes.clear();
 	isPrime.assign(n + 1, true);

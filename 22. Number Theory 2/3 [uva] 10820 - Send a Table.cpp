@@ -1,11 +1,12 @@
 // Problem: 10820 - Send a Table
 // Link: https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=1761
 // Author: Mai Thanh Hiep
-// Complexity: O(MAX * sqrt(MAX)), MAX = 50000 + T * O(N)
+// Complexity: O(MAX * sqrt(MAX)) + T * O(N), MAX = 50000
 
 #include <iostream>
 using namespace std;
 
+// O(sqrt(N))
 int phi(int n) {
 	int result = n;
 	for (int i = 2; i * i <= n; i++) {
