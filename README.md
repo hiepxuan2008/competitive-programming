@@ -5,7 +5,7 @@ Reference Solutions for Competitive Programming on Codeforces, SPOJ, UVA, Hacker
 - Clean code: name of variables, functions are very easy to understand.
 - Prove Time Complexity for each solution.
 - Comment ideas on why that code can solve the problem.
-- Sometimes I include so more than one solution for a problem.
+- Sometimes I include so more than one solution for a problem. (even include TLE solutions first and then ACCEPTED solutions)
 
 And don't forget to give me a star if you find this repository is useful for you. Thank you so much!
 
