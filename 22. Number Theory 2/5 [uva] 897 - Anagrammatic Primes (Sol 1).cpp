@@ -1,20 +1,18 @@
 // Problem: 897 - Anagrammatic Primes
 // Link: https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=838
 // Author: Mai Thanh Hiep
+// Complexity: O(MAXNlog(logMAXN)), MAXN = 10^8
+// Status: Accepted!
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
 #include <math.h>
 using namespace std;
-#define MAXN 999
+#define MAXN 100000000 // 10^8
 vector<int> primes;
 vector<bool> isPrime;
 vector<int> anagrammaticPrimes;
-/* Idea:
-	-	There is no Anagrammatic Prime in the interval[991, 10000000]. So for any number N >= 991, it would be efficient to print 0.
-		Therefore, checking prime upto 1000 is enough for this problem.
-*/ 
 
 // O(Nlog(logN))
 void sievePrimes(int n) {
@@ -35,8 +33,13 @@ void sievePrimes(int n) {
 
 bool isAnagrammaticPrimes(int x) {
 	vector<int> digits;
+	int digit;
 	while (x > 0) {
-		digits.push_back(x % 10);
+		digit = x % 10;
+		if (digit % 2 == 0 || digit % 5 == 0) // This will decrease complexity of algorithm so much!
+			return false;
+
+		digits.push_back(digit);
 		x = x / 10;
 	}
 
@@ -62,16 +65,8 @@ void sieveAnagrammaticPrimes() {
 }
 
 int solve(int n) {
-	if (n >= MAXN)
-		return 0;
-
 	int l = (floor)(log10(n)) + 1;
-	if (l == 1)
-		l = 10;
-	else if (l == 2)
-		l = 100;
-	else
-		l = 1000;
+	l = pow(10, l);
 
 	for (int i = 0; i < anagrammaticPrimes.size(); i++) {
 		if (anagrammaticPrimes[i] > n && anagrammaticPrimes[i] < l) {
