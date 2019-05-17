@@ -1,7 +1,7 @@
 // Problem: 897 - Anagrammatic Primes
 // Link: https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=838
 // Author: Mai Thanh Hiep
-// Complexity: O(MAXNlog(logMAXN)), MAXN = 10^8
+// Complexity: O(MAXNlog(logMAXN)), MAXN = 10^7
 // Status: Accepted!
 
 #include <iostream>
@@ -9,7 +9,7 @@
 #include <algorithm>
 #include <math.h>
 using namespace std;
-#define MAXN 100000000 // 10^8
+#define MAXN 10000000 // 10^7, n < 10^7 => max of (next power of 10 greater than n) will be 10^7
 vector<int> primes;
 vector<bool> isPrime;
 vector<int> anagrammaticPrimes;
@@ -36,7 +36,7 @@ bool isAnagrammaticPrimes(int x) {
 	int digit;
 	while (x > 0) {
 		digit = x % 10;
-		if (digit % 2 == 0 || digit % 5 == 0) // This will decrease complexity of algorithm so much!
+		if (x >= 10 && (digit % 2 == 0 || digit % 5 == 0)) // This will decrease complexity of algorithm so much!
 			return false;
 
 		digits.push_back(digit);
