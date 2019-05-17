@@ -1,4 +1,4 @@
-# competitive-programming
+# Competitive Programming Solutions
 Reference Solutions for Competitive Programming on Codeforces, SPOJ, UVA, Hackerrank, Hackerearth,…
 
 **My source code is very clean & easy to understand:**
