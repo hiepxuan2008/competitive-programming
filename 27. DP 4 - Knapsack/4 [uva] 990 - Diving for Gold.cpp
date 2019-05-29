@@ -42,7 +42,6 @@ int solve01Knapsack(const vector<int> weights, const vector<int> profits, int n,
 
 int main() {
 	int t, w, n;
-	int d, v;
 	int TEST_CASE = 0;
 	while (cin >> t >> w >> n) {
 		TEST_CASE++;
