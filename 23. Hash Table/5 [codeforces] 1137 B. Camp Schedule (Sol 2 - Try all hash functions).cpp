@@ -7,39 +7,68 @@
 // Comment: This solution using hash don't make sure 100% correct, but can be ACCEPT with a high probability!
 
 #include <iostream>
+#include <vector>
 #include <unordered_set>
 #include <algorithm>
 #include <string>
+#include <limits.h>
 using namespace std;
 
 typedef long long ll;
-const int base = 2; // base should be a prime number >= number of characters, for example 2 characters in this binary format
 const ll MAXN = 500000;
-ll POW[MAXN]; // POW[i] is equal to base^i
-ll hashS[MAXN]; // hashS[i] is hash value from s[0..i]
 
-ll getHashS(int i, int j) {
-	if (i <= 0)
-		return hashS[j];
+class HashFunction {
+	ll POW[MAXN]; // POW[i] is equal to base^i
+	ll hashS[MAXN]; // hashS[i] is hash value from s[0..i]
+	int base;
+	int MOD;
+	string s;
 
-	return hashS[j] - hashS[i - 1] * POW[j - i + 1];
+public:
+	HashFunction(int _base, int _mod, const string& s) {
+		base = base;
+		MOD = _mod;
+
+		// Precompute POW
+		POW[0] = 1;
+		for (int i = 1; i < MAXN; i++) // O(MAXN)
+			POW[i] = (POW[i - 1] * base) % MOD;
+
+		// Precompute hashS
+		hashS[0] = s[0] - '0';
+		for (int i = 1; i < s.size(); i++) // O(|S|)
+			hashS[i] = (hashS[i - 1] * base + s[i] - '0') % MOD;
+	}
+
+	ll getHashS(int i, int j) const {
+		if (i <= 0)
+			return hashS[j];
+
+		return (hashS[j] - hashS[i - 1] * POW[j - i + 1] % MOD + MOD) % MOD;
+	}
+};
+
+bool isSuffixEqualPrefix(const vector<HashFunction>& hashFunctions, int i, int n) {
+	for (int j = 0; j < hashFunctions.size(); j++) {
+		if (hashFunctions[j].getHashS(0, i) != hashFunctions[j].getHashS(n - 1 - i, n - 1))
+			return false;
+	}
+	return true;
 }
-
 
 // O(|S|)
 int findMaxSuffixAlsoPrefixLength(const string& s) {
+	vector<HashFunction> hashFunctions;
+	// try all hash functions
+	hashFunctions.push_back(HashFunction(2, 	1000000003, s));
+	hashFunctions.push_back(HashFunction(3, 	1000000007, s));
+	hashFunctions.push_back(HashFunction(5, 	1000000009, s));
+	hashFunctions.push_back(HashFunction(11, 	1000000009, s));
+
 	int n = s.length();
-
-	// Precompute hashS
-	hashS[0] = s[0] - '0';
-	for (int i = 1; i < n; i++) // O(|S|)
-		hashS[i] = hashS[i - 1] * base + s[i] - '0';
-
 	int maxLength = 0;
-	ll hashPrefix = 0;
 	for (int i = 0; i < n - 1; i++) { // O(|S|)
-		hashPrefix = hashPrefix * base + s[i] - '0';
-		if (hashPrefix == getHashS(n - 1 - i, n - 1))
+		if (isSuffixEqualPrefix(hashFunctions, i, n))
 			maxLength = i + 1;
 	}
 	return maxLength;
@@ -53,11 +82,6 @@ void countZeroAndOne(const string& s, int count[2]) {
 }
 
 int main() {
-	// Precompute POW
-	POW[0] = 1;
-	for (int i = 1; i < MAXN; i++) // O(MAXN)
-		POW[i] = (POW[i - 1] * base);
-
 	string s, t;
 	cin >> s >> t;
 

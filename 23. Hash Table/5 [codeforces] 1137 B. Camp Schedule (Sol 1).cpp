@@ -1,0 +1,111 @@
+﻿// Prolem: 1137 B. Camp Schedule
+// Link: https://codeforces.com/problemset/problem/1137/B
+// Author: Mai Thanh Hiep
+// Complexity: O(MAXN) + O(|S| + O|T|); |S|, |T| <= MAXN = 500000
+// Status: ACCEPTED
+
+// Comment: This solution using hash don't make sure 100% correct, but can be ACCEPT with a high probability!
+
+#include <iostream>
+#include <unordered_set>
+#include <algorithm>
+#include <string>
+using namespace std;
+
+typedef long long ll;
+const ll MAXN = 500000;
+
+class HashFunction {
+	ll POW[MAXN]; // POW[i] is equal to base^i
+	ll hashS[MAXN]; // hashS[i] is hash value from s[0..i]
+	int base;
+	int MOD;
+	string s;
+
+public:
+	HashFunction(int _base, int _mod, const string& s) {
+		base = base;
+		MOD = _mod;
+
+		// Precompute POW
+		POW[0] = 1;
+		for (int i = 1; i < MAXN; i++) // O(MAXN)
+			POW[i] = (POW[i - 1] * base) % MOD;
+
+		// Precompute hashS
+		hashS[0] = s[0] - '0';
+		for (int i = 1; i < s.size(); i++) // O(|S|)
+			hashS[i] = (hashS[i - 1] * base + s[i] - '0') % MOD;
+	}
+
+	ll getHashS(int i, int j) {
+		if (i <= 0)
+			return hashS[j];
+
+		return (hashS[j] - hashS[i - 1] * POW[j - i + 1] % MOD + MOD) % MOD;
+	}
+};
+
+// O(|S|)
+int findMaxSuffixAlsoPrefixLength(const string& s) {
+	HashFunction hashFunction1(33, 1000000007, s);
+
+	int n = s.length();
+	int maxLength = 0;
+	for (int i = 0; i < n - 1; i++) { // O(|S|)
+		if (hashFunction1.getHashS(0, i) == hashFunction1.getHashS(n - 1 - i, n - 1))
+			maxLength = i + 1;
+	}
+	return maxLength;
+}
+
+void countZeroAndOne(const string& s, int count[2]) {
+	count[0] = count[1] = 0;
+	for (int i = 0; i < s.size(); i++) {
+		count[s[i] - '0']++;
+	}
+}
+
+int main() {
+	string s, t;
+	cin >> s >> t;
+
+	int cntS[2], cntT[2];
+	countZeroAndOne(s, cntS);
+	countZeroAndOne(t, cntT);
+
+	string ans = "";
+	if (cntS[0] >= cntT[0] && cntS[1] >= cntT[1]) {
+		// insert t
+		ans += t;
+		cntS[0] -= cntT[0];
+		cntS[1] -= cntT[1];
+
+		// find maxSuffixAlsoPrefixLength
+		int maxSuffixAlsoPrefixLength = findMaxSuffixAlsoPrefixLength(t); // O(|T|)
+		if (maxSuffixAlsoPrefixLength > 0) {
+			t = t.substr(maxSuffixAlsoPrefixLength); // cut prefix of t
+		}
+		countZeroAndOne(t, cntT); // recount chars need for insert t
+
+		// insert parts of t without prefix
+		while (cntS[0] >= cntT[0] && cntS[1] >= cntT[1]) {
+			ans += t;
+			cntS[0] -= cntT[0];
+			cntS[1] -= cntT[1];
+		}
+
+		// insert remain chars
+		for (int i = 0; i < cntS[0]; i++)
+			ans += '0';
+		for (int i = 0; i < cntS[1]; i++)
+			ans += '1';
+	}
+	else {
+		ans = s;
+	}
+
+	cout << ans;
+
+	return 0;
+}

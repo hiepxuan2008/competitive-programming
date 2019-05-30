@@ -1,7 +1,6 @@
 ﻿// Prolem: SUFEQPRE - Suffix Equal Prefix
 // Link: https://www.spoj.com/problems/SUFEQPRE/
 // Author: Mai Thanh Hiep
-// Reference from: https://vnoi.info/wiki/algo/string/hash
 // Complexity: O(MAXN) + T * O(|S|), |S| <= MAXN = 10^6, T <= 50
 // Status: ACCEPTED
 
@@ -45,15 +44,13 @@ int main() {
 		int n = s.length();
 
 		// Precompute hashS
-		hashS[0] = s[0] - 'a' + 1; // 'a' will be 1, 'b' will be 2 and so on... ('a' start from 1 but 0 to avoid case hash("abc") = hash("bc"))
+		hashS[0] = s[0] - 'a';
 		for (int i = 1; i < n; i++) // O(|S|)
-			hashS[i] = hashS[i - 1] * base + s[i] - 'a' + 1;
+			hashS[i] = hashS[i - 1] * base + s[i] - 'a';
 
 		int countPrefixAlsoSuffix = 0;
-		ll hashPrefix = 0;
 		for (int i = 0; i < n - 1; i++) { // O(|S|)
-			hashPrefix = hashPrefix * base + s[i] - 'a' + 1;
-			if (hashPrefix == getHashS(n - 1 - i, n - 1))
+			if (hashS[i] == getHashS(n - 1 - i, n - 1))
 				countPrefixAlsoSuffix++;
 		}
 
