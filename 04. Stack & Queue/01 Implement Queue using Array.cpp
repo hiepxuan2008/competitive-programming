@@ -39,6 +39,9 @@ public:
     }
 
     int top() {
+        if (empty())
+            throw "Queue is empty";
+
         return _arr[_top];
     }
 
