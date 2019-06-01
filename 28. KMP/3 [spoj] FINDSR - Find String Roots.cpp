@@ -1,7 +1,7 @@
 ﻿// Problem: FINDSR - Find String Roots
 // Link: https://www.spoj.com/problems/FINDSR/
 // Author: Mai Thanh Hiep
-// Complexity: O(|s|), |s| <= 10^5 -> This is complexity of this solution
+// Complexity: TestCase * O(|s|), |s| <= 10^5
 
 #include <iostream>
 #include <string>
