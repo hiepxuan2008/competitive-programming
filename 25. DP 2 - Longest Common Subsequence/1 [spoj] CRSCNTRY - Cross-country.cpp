@@ -1,5 +1,5 @@
 ﻿// Problem: CRSCNTRY - Cross-country
-// Link: https://vn.spoj.com/problems/CRSCNTRY/
+// Link: https://www.spoj.com/problems/CRSCNTRY/
 // Author: Mai Thanh Hiep
 // Complexity: T * O(N^2); T <= 10, N <= 2000
 

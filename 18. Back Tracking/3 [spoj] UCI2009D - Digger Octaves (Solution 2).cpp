@@ -1,5 +1,5 @@
 // Problem: UCI2009D - Digger Octaves
-// Link: https://vn.spoj.com/problems/UCI2009D/
+// Link: https://www.spoj.com/problems/UCI2009D/
 // Author: Mai Thanh Hiep
 // Complexity: T * O(N^2 * 4 * 3^6), N <= 8
 
