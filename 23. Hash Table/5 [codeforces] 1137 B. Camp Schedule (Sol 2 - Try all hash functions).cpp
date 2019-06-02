@@ -21,11 +21,11 @@ class HashFunction {
     ll POW[MAXN]; // POW[i] is equal to base^i
     ll hashS[MAXN]; // hashS[i] is hash value from s[0..i]
     int base;
-    int MOD;
+    ll MOD;
     string s;
 
 public:
-    HashFunction(int base, int mod, const string& s) {
+    HashFunction(int base, ll mod, const string& s) {
         this->base = base;
         this->MOD = mod;
 
