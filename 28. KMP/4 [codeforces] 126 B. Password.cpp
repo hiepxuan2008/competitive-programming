@@ -33,14 +33,20 @@ void KMPPreprocess(const string& p, vector<int>& prefix) {
 string solve(const string& s, const vector<int>& prefix) {
     int n = prefix.size();
     int j = prefix[n - 1];
-    while (j != 0) {
+    if (j > 0) {
         for (int i = 1; i < n - 1; i++) {
             if (prefix[i] == j) {
-                return s.substr(0, j);
+                return s.substr(0, j); // found mid substr the same prefix and suffix
             }
         }
-        j = prefix[j - 1];
+
+        j = prefix[j - 1]; // try smaller one
     }
+
+    if (j > 0) {
+        return s.substr(0, j);
+    }
+
     return "Just a legend";
 }
 
