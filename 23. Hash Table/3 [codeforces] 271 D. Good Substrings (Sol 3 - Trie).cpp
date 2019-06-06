@@ -15,66 +15,66 @@ using namespace std;
 const int ALPHABET_SIZE = 26;
 
 struct Node {
-	Node* child[ALPHABET_SIZE];
-	int count;
+    Node* child[ALPHABET_SIZE];
+    int count;
 
-	Node() {
-		for (int i = 0; i < ALPHABET_SIZE; i++) {
-			child[i] = NULL;
-		}
-		count = 0;
-	}
+    Node() {
+        for (int i = 0; i < ALPHABET_SIZE; i++) {
+            child[i] = NULL;
+        }
+        count = 0;
+    }
 };
 
 void deleteTrie(Node* root) {
-	if (root == NULL)
-		return;
+    if (root == NULL)
+        return;
 
-	for (int i = 0; i < ALPHABET_SIZE; i++) {
-		deleteTrie(root->child[i]);
-	}
-	delete root;
+    for (int i = 0; i < ALPHABET_SIZE; i++) {
+        deleteTrie(root->child[i]);
+    }
+    delete root;
 }
 
 int main() {
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
 
-	string s, strBadChars;
-	int k;
-	cin >> s >> strBadChars >> k;
+    string s, strBadChars;
+    int k;
+    cin >> s >> strBadChars >> k;
 
-	int ans = 0;
-	Node* trie = new Node();
-	Node* current;
-	char ch;
-	for (int i = 0, n = s.length(), badCharCounter; i < n; i++) { // O(|S|^2), |S| <= 1500
-		badCharCounter = 0;
-		current = trie;
-		for (int j = i; j < n; j++) {
-			ch = s[j];
+    int ans = 0;
+    Node* trie = new Node();
+    Node* current;
+    char ch;
+    for (int i = 0, n = s.length(), badCharCounter; i < n; i++) { // O(|S|^2), |S| <= 1500
+        badCharCounter = 0;
+        current = trie;
+        for (int j = i; j < n; j++) {
+            ch = s[j];
 
-			if (strBadChars[ch - 'a'] == '0')
-				badCharCounter++;
+            if (strBadChars[ch - 'a'] == '0')
+                badCharCounter++;
 
-			if (badCharCounter > k)
-				break;
+            if (badCharCounter > k)
+                break;
 
-			if (current->child[ch - 'a'] == NULL) {
-				current->child[ch - 'a'] = new Node();
-			}
+            if (current->child[ch - 'a'] == NULL) {
+                current->child[ch - 'a'] = new Node();
+            }
 
-			if (current->child[ch - 'a']->count == 0) {
-				current->child[ch - 'a']->count++;
-				ans++;
-			}
+            if (current->child[ch - 'a']->count == 0) {
+                current->child[ch - 'a']->count++;
+                ans++;
+            }
 
-			current = current->child[ch - 'a'];
-		}
-	}
-	deleteTrie(trie);
+            current = current->child[ch - 'a'];
+        }
+    }
+    deleteTrie(trie);
 
-	cout << ans << endl;
+    cout << ans << endl;
 
-	return 0;
+    return 0;
 }

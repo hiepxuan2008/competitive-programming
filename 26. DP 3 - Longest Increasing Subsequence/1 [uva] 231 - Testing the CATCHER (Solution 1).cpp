@@ -15,45 +15,45 @@ int dp[MAX];
 
 // O(N^2)
 int longestNotIncreasingSubsequence(int n) {
-	for (int i = 0; i < n; i++)
-		dp[i] = 1;
+    for (int i = 0; i < n; i++)
+        dp[i] = 1;
 
-	for (int i = 1; i < n; i++) {
-		for (int j = 0; j < i; j++) {
-			if (arr[i] <= arr[j] && dp[i] < dp[j] + 1) {
-				dp[i] = dp[j] + 1;
-			}
-		}
-	}
+    for (int i = 1; i < n; i++) {
+        for (int j = 0; j < i; j++) {
+            if (arr[i] <= arr[j] && dp[i] < dp[j] + 1) {
+                dp[i] = dp[j] + 1;
+            }
+        }
+    }
 
-	int result = 0;
-	for (int i = 0; i < n; i++)
-		result = max(result, dp[i]);
-	return result;
+    int result = 0;
+    for (int i = 0; i < n; i++)
+        result = max(result, dp[i]);
+    return result;
 }
 
 int main() {
-	int n = 0, x;
-	int tc = 0;
-	while (cin >> x) {
-		if (x == -1)
-			break;
+    int n = 0, x;
+    int tc = 0;
+    while (cin >> x) {
+        if (x == -1)
+            break;
 
-		n = 0;
-		arr[n++] = x;
-		while (cin >> x) {
-			if (x == -1)
-				break;
-			arr[n++] = x;
-		}
+        n = 0;
+        arr[n++] = x;
+        while (cin >> x) {
+            if (x == -1)
+                break;
+            arr[n++] = x;
+        }
 
-		tc++;
-		if (tc > 1)
-			cout << endl;
+        tc++;
+        if (tc > 1)
+            cout << endl;
 
-		cout << "Test #" << tc << ":" << endl;
-		cout << "  maximum possible interceptions: " << longestNotIncreasingSubsequence(n) << endl;
-	}
+        cout << "Test #" << tc << ":" << endl;
+        cout << "  maximum possible interceptions: " << longestNotIncreasingSubsequence(n) << endl;
+    }
 
-	return 0;
+    return 0;
 }

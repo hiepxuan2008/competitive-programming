@@ -13,32 +13,32 @@
 using namespace std;
 
 int main() {
-	string s;
-	cin >> s;
+    string s;
+    cin >> s;
 
-	string strBadChars;
-	cin >> strBadChars;
+    string strBadChars;
+    cin >> strBadChars;
 
-	int k;
-	cin >> k;
+    int k;
+    cin >> k;
 
-	int n = s.length();
-	int badCharCounter = 0;
-	unordered_set<string> goodSubStrSet;
-	for (int i = 0; i < n; i++) { // O(|S|^3), |S| <= 1500
-		badCharCounter = 0;
-		for (int j = i; j < n; j++) {
-			if (strBadChars[s[j] - 'a'] == '0')
-				badCharCounter++;
+    int n = s.length();
+    int badCharCounter = 0;
+    unordered_set<string> goodSubStrSet;
+    for (int i = 0; i < n; i++) { // O(|S|^3), |S| <= 1500
+        badCharCounter = 0;
+        for (int j = i; j < n; j++) {
+            if (strBadChars[s[j] - 'a'] == '0')
+                badCharCounter++;
 
-			if (badCharCounter > k)
-				break;
+            if (badCharCounter > k)
+                break;
 
-			goodSubStrSet.insert(s.substr(i, j - i + 1)); // O(|S|) -> for calculate hashcode of substr s
-		}
-	}
+            goodSubStrSet.insert(s.substr(i, j - i + 1)); // O(|S|) -> for calculate hashcode of substr s
+        }
+    }
 
-	cout << goodSubStrSet.size() << endl;
+    cout << goodSubStrSet.size() << endl;
 
-	return 0;
+    return 0;
 }

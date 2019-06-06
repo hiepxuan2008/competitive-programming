@@ -12,22 +12,22 @@ typedef long long ll;
 #define MAXN 10000
 
 int main() {
-	vector<int> coins(COIN_SIZE + 1);
-	for (int i = 1; i <= COIN_SIZE; i++)
-		coins[i] = i * i * i;
+    vector<int> coins(COIN_SIZE + 1);
+    for (int i = 1; i <= COIN_SIZE; i++)
+        coins[i] = i * i * i;
 
-	vector<ll> dp(MAXN, 0);
-	dp[0] = 1;
-	for (int i = 1; i <= COIN_SIZE; i++) {
-		for (int j = coins[i]; j < MAXN; j++) {
-			dp[j] += dp[j - coins[i]];
-		}
-	}
+    vector<ll> dp(MAXN, 0);
+    dp[0] = 1;
+    for (int i = 1; i <= COIN_SIZE; i++) {
+        for (int j = coins[i]; j < MAXN; j++) {
+            dp[j] += dp[j - coins[i]];
+        }
+    }
 
-	int n;
-	while (cin >> n) {
-		cout << dp[n] << endl;
-	}
+    int n;
+    while (cin >> n) {
+        cout << dp[n] << endl;
+    }
 
-	return 0;
+    return 0;
 }
