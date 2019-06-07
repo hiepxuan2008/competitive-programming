@@ -7,35 +7,35 @@
 using namespace std;
 
 int main() {
-	int t;
-	cin >> t;
+    int t;
+    cin >> t;
 
-	unsigned long long n, m;
-	while (t--) {
-		cin >> n >> m;
+    unsigned long long n, m;
+    while (t--) {
+        cin >> n >> m;
 
-		bool firstItem = true;
-		unsigned long long x;
-		int shiftLeft;
-		while (m != 0) { // Log(M)
-			x = 1L;
-			shiftLeft = 0;
-			while ((x << 1) <= m) {
-				shiftLeft++;
-				x <<= 1;
-			}
+        bool firstItem = true;
+        unsigned long long x;
+        int shiftLeft;
+        while (m != 0) { // Log(M)
+            x = 1L;
+            shiftLeft = 0;
+            while ((x << 1) <= m) {
+                shiftLeft++;
+                x <<= 1;
+            }
 
-			if (firstItem) {
-				firstItem = false;
-				cout << "(" << n << "<<" << shiftLeft << ")";
-			} else {
-				cout << " + (" << n << "<<" << shiftLeft << ")";
-			}
+            if (firstItem) {
+                firstItem = false;
+                cout << "(" << n << "<<" << shiftLeft << ")";
+            } else {
+                cout << " + (" << n << "<<" << shiftLeft << ")";
+            }
 
-			m = m - x;
-		}
-		cout << endl;
-	}
+            m = m - x;
+        }
+        cout << endl;
+    }
 
-	return 0;
+    return 0;
 }

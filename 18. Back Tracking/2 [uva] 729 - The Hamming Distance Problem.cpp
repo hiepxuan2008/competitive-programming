@@ -10,43 +10,43 @@
 using namespace std;
 
 void backtracking(int H, string& result, int i, int bit1Counter) {
-	int n = result.size();
-	if (i == n) {
-		if (bit1Counter == H) {
-			cout << result << endl;
-		}
-	} else {
-		for (char ch = '0'; ch <= '1'; ch++) {
-			if (ch == '1')
-				bit1Counter++;
+    int n = result.size();
+    if (i == n) {
+        if (bit1Counter == H) {
+            cout << result << endl;
+        }
+    } else {
+        for (char ch = '0'; ch <= '1'; ch++) {
+            if (ch == '1')
+                bit1Counter++;
 
-			if (bit1Counter <= H) {
-				result[i] = ch;
-				backtracking(H, result, i + 1, bit1Counter);
-			}
+            if (bit1Counter <= H) {
+                result[i] = ch;
+                backtracking(H, result, i + 1, bit1Counter);
+            }
 
-			// since bit1Counter is local variable, we don't need to backtrack
-			// if (ch == '1')
-			//	bit1Counter--;
-		}
-	}
+            // since bit1Counter is local variable, we don't need to backtrack
+            // if (ch == '1')
+            //	bit1Counter--;
+        }
+    }
 }
 
 int main() {
-	int T, N, H;
-	cin >> T;
+    int T, N, H;
+    cin >> T;
 
-	string result;
-	bool needPrintBlankLine = false;
-	while (T--) {
-		if (needPrintBlankLine)
-			cout << endl;
-		needPrintBlankLine = true;
+    string result;
+    bool needPrintBlankLine = false;
+    while (T--) {
+        if (needPrintBlankLine)
+            cout << endl;
+        needPrintBlankLine = true;
 
-		cin >> N >> H;
-		result.resize(N);
-		backtracking(H, result, 0, 0);
-	}
+        cin >> N >> H;
+        result.resize(N);
+        backtracking(H, result, 0, 0);
+    }
 
-	return 0;
+    return 0;
 }

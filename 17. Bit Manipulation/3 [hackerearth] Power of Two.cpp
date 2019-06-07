@@ -10,38 +10,38 @@ using namespace std;
 #define NUM_BITS 32
 
 int getBit(int num, int k) {
-	return (num >> k) & 1;
+    return (num >> k) & 1;
 }
 
 bool solve(int* arr, int n) {
-	// Check all possible combine that bit i-th is set
-	for (int i = 0; i < NUM_BITS; i++) {
-		int mask = 0xffffffff; // all bits 1
-		for (int j = 0; j < n; j++) {
-			if (getBit(arr[j], i) == 1) { // bit i-th is set
-				mask &= arr[j];
-			}
-		}
+    // Check all possible combine that bit i-th is set
+    for (int i = 0; i < NUM_BITS; i++) {
+        int mask = 0xffffffff; // all bits 1
+        for (int j = 0; j < n; j++) {
+            if (getBit(arr[j], i) == 1) { // bit i-th is set
+                mask &= arr[j];
+            }
+        }
 
-		if (mask == (1 << i)) // mask == 2^i
-			return true;
-	}
-	return false;
+        if (mask == (1 << i)) // mask == 2^i
+            return true;
+    }
+    return false;
 }
 
 int main() {
-	int t, n;
-	cin >> t;
+    int t, n;
+    cin >> t;
 
-	int arr[MAX];
-	while (t--) {
-		cin >> n;
-		for (int i = 0; i < n; i++) {
-			cin >> arr[i];
-		}
+    int arr[MAX];
+    while (t--) {
+        cin >> n;
+        for (int i = 0; i < n; i++) {
+            cin >> arr[i];
+        }
 
-		cout << (solve(arr, n) ? "YES" : "NO") << endl;
-	}
+        cout << (solve(arr, n) ? "YES" : "NO") << endl;
+    }
 
-	return 0;
+    return 0;
 }

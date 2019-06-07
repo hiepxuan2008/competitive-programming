@@ -7,36 +7,36 @@
 using namespace std;
 
 int main() {
-	int n, m, b, g, x;
-	cin >> n >> m;
-	vector<bool> boyHappy(n, false);
-	vector<bool> girlHappy(m, false);
+    int n, m, b, g, x;
+    cin >> n >> m;
+    vector<bool> boyHappy(n, false);
+    vector<bool> girlHappy(m, false);
 
-	cin >> b;
-	for (int i = 0; i < b; i++) {
-		cin >> x;
-		boyHappy[x] = true;
-	}
-	cin >> g;
-	for (int i = 0; i < g; i++) {
-		cin >> x;
-		girlHappy[x] = true;
-	}
+    cin >> b;
+    for (int i = 0; i < b; i++) {
+        cin >> x;
+        boyHappy[x] = true;
+    }
+    cin >> g;
+    for (int i = 0; i < g; i++) {
+        cin >> x;
+        girlHappy[x] = true;
+    }
 
-	for (int i = 0; i < 100000; i++) {
-		if (boyHappy[i % n] || girlHappy[i % m]) {
-			boyHappy[i % n] = true;
-			girlHappy[i % m] = true;
-		}
-	}
-	
-	bool result = true;
-	for (int i = 0; i < n; i++)
-		result &= boyHappy[i];
-	for (int i = 0; i < m; i++)
-		result &= girlHappy[i];
+    for (int i = 0; i < 100000; i++) {
+        if (boyHappy[i % n] || girlHappy[i % m]) {
+            boyHappy[i % n] = true;
+            girlHappy[i % m] = true;
+        }
+    }
 
-	cout << (result ? "Yes" : "No") << endl;
+    bool result = true;
+    for (int i = 0; i < n; i++)
+        result &= boyHappy[i];
+    for (int i = 0; i < m; i++)
+        result &= girlHappy[i];
 
-	return 0;
+    cout << (result ? "Yes" : "No") << endl;
+
+    return 0;
 }

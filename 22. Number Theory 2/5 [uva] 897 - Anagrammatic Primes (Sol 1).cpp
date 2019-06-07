@@ -16,77 +16,77 @@ vector<int> anagrammaticPrimes;
 
 // O(Nlog(logN))
 void sievePrimes(int n) {
-	primes.clear();
-	isPrime.assign(n + 1, true);
+    primes.clear();
+    isPrime.assign(n + 1, true);
 
-	for (int p = 2; p*p <= n; p++) {
-		if (isPrime[p]) {
-			for (int i = p * p; i <= n; i += p)
-				isPrime[i] = false;
-		}
-	}
+    for (int p = 2; p*p <= n; p++) {
+        if (isPrime[p]) {
+            for (int i = p * p; i <= n; i += p)
+                isPrime[i] = false;
+        }
+    }
 
-	for (int p = 2; p <= n; p++)
-		if (isPrime[p])
-			primes.push_back(p);
+    for (int p = 2; p <= n; p++)
+        if (isPrime[p])
+            primes.push_back(p);
 }
 
 bool isAnagrammaticPrimes(int x) {
-	vector<int> digits;
-	int digit;
-	while (x > 0) {
-		digit = x % 10;
-		if (x >= 10 && (digit % 2 == 0 || digit % 5 == 0)) // This will decrease complexity of algorithm so much!
-			return false;
+    vector<int> digits;
+    int digit;
+    while (x > 0) {
+        digit = x % 10;
+        if (x >= 10 && (digit % 2 == 0 || digit % 5 == 0)) // This will decrease complexity of algorithm so much!
+            return false;
 
-		digits.push_back(digit);
-		x = x / 10;
-	}
+        digits.push_back(digit);
+        x = x / 10;
+    }
 
-	sort(digits.begin(), digits.end());
-	do {
-		x = 0;
-		for (int i = 0; i < digits.size(); i++)
-			x = x * 10 + digits[i];
+    sort(digits.begin(), digits.end());
+    do {
+        x = 0;
+        for (int i = 0; i < digits.size(); i++)
+            x = x * 10 + digits[i];
 
-		if (!isPrime[x])
-			return false;
-	} while (next_permutation(digits.begin(), digits.end()));
+        if (!isPrime[x])
+            return false;
+    } while (next_permutation(digits.begin(), digits.end()));
 
-	return true;
+    return true;
 }
 
 void sieveAnagrammaticPrimes() {
-	for (int i = 0; i < primes.size(); i++) {
-		if (isAnagrammaticPrimes(primes[i])) {
-			anagrammaticPrimes.push_back(primes[i]);
-		}
-	}
+    for (int i = 0; i < primes.size(); i++) {
+        if (isAnagrammaticPrimes(primes[i])) {
+            anagrammaticPrimes.push_back(primes[i]);
+        }
+    }
 }
 
 int solve(int n) {
-	int l = (floor)(log10(n)) + 1;
-	l = pow(10, l);
+    int l = (floor)(log10(n)) + 1;
+    l = pow(10, l);
 
-	for (int i = 0; i < anagrammaticPrimes.size(); i++) {
-		if (anagrammaticPrimes[i] > n && anagrammaticPrimes[i] < l) {
-			return anagrammaticPrimes[i];
-		}
-	}
-	return 0;
+    for (int i = 0; i < anagrammaticPrimes.size(); i++) {
+        if (anagrammaticPrimes[i] > n && anagrammaticPrimes[i] < l) {
+            return anagrammaticPrimes[i];
+        }
+    }
+    return 0;
 }
 
 int main() {
-	sievePrimes(MAXN);
-	sieveAnagrammaticPrimes();
+    sievePrimes(MAXN);
+    sieveAnagrammaticPrimes();
 
-	int n;
-	while (cin >> n) {
-		if (n == 0)
-			break;
+    int n;
+    while (cin >> n) {
+        if (n == 0)
+            break;
 
-		cout << solve(n) << endl;
-	}
+        cout << solve(n) << endl;
+    }
 
-	return 0;
+    return 0;
 }

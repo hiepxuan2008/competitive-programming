@@ -6,16 +6,16 @@
 using namespace std;
 
 int main() {
-	int n;
-	while (cin >> n) {
-		int x, y = 1;
-		for (x = 1; ; x++) {
-			if (y % n == 0)
-				break;
-			y = y * 10 + 1;
-			y %= n;
-		}
-		cout << x << endl;
-	}
-	return 0;
+    int n;
+    while (cin >> n) {
+        int x, y = 1;
+        for (x = 1; ; x++) {
+            if (y % n == 0)
+                break;
+            y = y * 10 + 1;
+            y %= n;
+        }
+        cout << x << endl;
+    }
+    return 0;
 }
