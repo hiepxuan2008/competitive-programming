@@ -15,19 +15,20 @@ int arr[MAX];
 int dpIncreasing[MAX];
 int dpDescreasing[MAX];
 
-// also we call it upper_bound
+// also we call it lower_bound
 int findFirstElementGreaterThanOrEqualXInIncreasingArray(const vector<int>& indices, int left, int right, int x) {
+    int pos = -1;
     while (left <= right) {
         int mid = left + (right - left) / 2;
-        if (arr[indices[mid]] >= x && (mid == left || arr[indices[mid - 1]] < x))
-            return mid;
-        else if (arr[indices[mid]] < x) {
-            left = mid + 1;
-        } else {
+        int index = indices[mid];
+        if (arr[index] >= x) {
+            pos = mid;
             right = mid - 1;
+        } else {
+            left = mid + 1;
         }
     }
-    return -1;
+    return pos;
 }
 
 // O(NlogN)
