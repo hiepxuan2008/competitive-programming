@@ -14,8 +14,8 @@ Author: Mai Thanh Hiep
 
 >Intro: I'm a Software Engineer. My code keeps: Clean & Optimize (easy to understand & high performance)
 
-LinkedIn: https://www.linkedin.com/in/hiepit/
+LinkedIn: https://www.linkedin.com/in/hlptruc/
 
-Email: hiepxuan2008@gmail.com
+Email: huynhtruc0309@gmail.com
 
-Facebook: https://www.facebook.com/hiepit
+Facebook: https://www.facebook.com/hlptruc/
