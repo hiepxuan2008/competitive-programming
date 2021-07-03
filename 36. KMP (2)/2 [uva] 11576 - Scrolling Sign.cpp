@@ -1,7 +1,7 @@
 // Problem: 11576 - Scrolling Sign
 // Link: https://onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=2623
 // Author: Mai Thanh Hiep
-// Complexity: O(T * N * M * M), where T is number of testcases, N, M <= 100 is number of words and length of each word corresponding.
+// Complexity: O(T * N * M), where T is number of testcases, N, M <= 100 is number of words and length of each word corresponding.
 
 #include <iostream>
 #include <vector>
@@ -23,12 +23,12 @@ vector<int> computeKMP(string& P) {
     return lps;
 }
 
-string mergeOverlap(string& str1, string& str2) {
+int mergeOverlap(string& str1, string& str2) {
     int m = str1.size(), n = str2.size();
     string concat = str2 + "#" + str1; // Example: str1 = "abc", str2 = "bcd" -> concat = "bcd#abc" -> overlapLen=2
     vector<int> lps = computeKMP(concat);
     int overlapLen = lps[concat.size() - 1];
-    return str1 + str2.substr(overlapLen, n - overlapLen);
+    return n - overlapLen; // return: inserted length
 }
 
 int main() {
@@ -40,14 +40,13 @@ int main() {
     cin >> t;
     while (t--) {
         cin >> m >> n;
-        string ans;
-        cin >> ans;
-        for (int i = 1; i < n; ++i) { // O(N * M * M)
-            string str;
-            cin >> str;
-            ans = mergeOverlap(ans, str);
+        vector<string> strs(n);
+        for (int i = 0; i < n; ++i) cin >> strs[i];
+        int ans = strs[0].size();
+        for (int i = 1; i < n; ++i) { // O(N * M)
+            ans += mergeOverlap(strs[i-1], strs[i]);
         }
-        cout << ans.size() << '\n';
+        cout << ans << '\n';
     }
     return 0;
 }
